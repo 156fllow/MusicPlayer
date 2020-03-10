@@ -62,10 +62,18 @@ public class PlaceholderFragment extends Fragment {
 //            }
 //        });
         RecyclerView rv = root.findViewById(R.id.recyclerview);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this.createDataset());
+        final RecyclerViewAdapter adapter = new RecyclerViewAdapter(this.createDataset());
         LinearLayoutManager lim = new LinearLayoutManager(getContext());
         rv.setLayoutManager(lim);
         rv.setAdapter(adapter);
+        adapter.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String s = adapter.list.get(v.getId()).getTitle();
+                Toast.makeText(getActivity(),s,Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return root;
     }
 
